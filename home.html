@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匠 - TAKUMI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for a clean, modern look, Noto Serif JP for general Japanese text, and Sawarabi Mincho for the header logo -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;700&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Serif JP', sans-serif;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+        .font-serif-jp {
+            font-family: 'Noto Serif JP', serif;
+        }
+        /* New font for the header logo, set to Sawarabi Mincho for a calligraphic feel */
+        .font-zen-old-mincho {
+            font-family: 'Sawarabi Mincho', serif;
+        }
+        .hero-background {
+            /* Using the requested image for the hero section background */
+            background-image: url('hhh.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            /* Dark overlay for better text readability */
+            filter: brightness(0.7);
+        }
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+        }
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 2px;
+            background-color: #a1887f; /* Subtle accent color */
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #a1887f; /* Hover effect */
+        }
+        /* Initial header state (transparent, white text) */
+        #main-header.initial-state .header-logo,
+        #main-header.initial-state .nav-link,
+        #main-header.initial-state .mobile-menu-icon {
+            color: #ffffff;
+        }
+        /* Scrolled header state (white background, dark text) */
+        #main-header.scrolled-state {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #main-header.scrolled-state .header-logo,
+        #main-header.scrolled-state .nav-link,
+        #main-header.scrolled-state .mobile-menu-icon {
+            color: #333333;
+        }
+        /* Mobile menu specific styles (always dark text on white background) */
+        #mobile-menu a {
+            color: #333333;
+        }
+        #mobile-menu button {
+            color: #333333;
+        }
+
+        /* Styling for the H1 text in the hero section */
+        .h1-hero-text {
+            /* Removed background-clip: text and color: transparent */
+            color: #ffffff; /* Set a clear white color for visibility */
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9); /* Stronger shadow for contrast */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header and Navigation -->
+    <header id="main-header" class="fixed w-full z-50 py-4 transition-all duration-300 ease-in-out initial-state">
+        <nav class="container mx-auto flex justify-between items-center px-6">
+            <!-- Apply Sawarabi Mincho font to the header logo -->
+            <a href="#home" class="text-3xl font-zen-old-mincho font-bold tracking-wider header-logo"></a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link font-medium text-lg">匠について</a>
+                <a href="#menu" class="nav-link font-medium text-lg">お品書き</a>
+                <a href="#reservation" class="nav-link font-medium text-lg">ご予約</a>
+                <a href="#access" class="nav-link font-medium text-lg">アクセス</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none mobile-menu-icon">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-6 text-2xl">
+            <button id="close-mobile-menu" class="absolute top-6 right-6 focus:outline-none">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <a href="#about" class="nav-link text-gray-700 hover:text-gray-900 font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">匠について</a>
+            <a href="#menu" class="nav-link text-gray-700 hover:text-gray-900 font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">お品書き</a>
+            <a href="#reservation" class="nav-link text-gray-700 hover:text-gray-900 font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">ご予約</a>
+            <a href="#access" class="nav-link text-gray-700 hover:text-gray-900 font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">アクセス</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center text-white overflow-hidden">
+        <div class="absolute inset-0 hero-background"></div>
+        <div class="absolute inset-0 overlay"></div>
+        <div class="relative z-10 text-center p-4">
+            <!-- Apply solid color and stronger shadow to the H1 text for better visibility -->
+            <h1 class="text-6xl md:text-8xl font-serif-jp font-bold tracking-widest mb-6 h1-hero-text">匠</h1>
+            <p class="text-xl md:text-2xl font-light tracking-wide drop-shadow-md">研ぎ澄まされた技と心、旬を握る至高のひととき</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h2 class="text-4xl font-serif-jp font-bold mb-12 section-title text-gray-800">匠について</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://placehold.co/600x400/D7CCC8/4E342E?text=Craftsmanship" alt="職人の手元" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                </div>
+                <div class="text-left">
+                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
+                        一貫一貫に魂を込める。厳選された旬の食材が、匠の技によって至高の一皿へと昇華されます。
+                        静寂な空間で、五感を研ぎ澄ます至福の時をお過ごしください。
+                    </p>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        私たちは、日本の四季が織りなす豊かな恵みを大切にし、
+                        その日の最高の素材を最高の状態でご提供することをお約束いたします。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h2 class="text-4xl font-serif-jp font-bold mb-12 section-title text-gray-800">お品書き</h2>
+            <div class="grid md:grid-cols-2 gap-12 text-left">
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-serif-jp font-semibold mb-4 text-gray-800">おまかせコース</h3>
+                    <p class="text-lg text-gray-700 mb-4">
+                        その日一番の旬を、匠の技で仕立てたおまかせコースにてご提供いたします。
+                        季節ごとに移り変わる豊かな味わいをお楽しみください。
+                    </p>
+                    <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                        <li>握り十貫</li>
+                        <li>季節の小鉢</li>
+                        <li>特製椀物</li>
+                        <li>甘味</li>
+                    </ul>
+                    <p class="text-xl font-bold text-gray-900 mt-6">¥25,000〜 <span class="text-sm font-normal text-gray-600">（税・サービス料別）</span></p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-serif-jp font-semibold mb-4 text-gray-800">お飲み物</h3>
+                    <p class="text-lg text-gray-700 mb-4">
+                        お料理の味わいを一層引き立てる、厳選された美酒をご用意しております。
+                        ソムリエがお客様のお好みに合わせてご提案いたします。
+                    </p>
+                    <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                        <li>日本各地より厳選された日本酒</li>
+                        <li>シャンパーニュ</li>
+                        <li>ソムリエ厳選ワイン（赤・白）</li>
+                        <li>焼酎、ウイスキー</li>
+                        <li>ソフトドリンク</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-2xl text-center">
+            <h2 class="text-4xl font-serif-jp font-bold mb-12 section-title text-gray-800">ご予約</h2>
+            <p class="text-lg leading-relaxed mb-8 text-gray-700">
+                ご予約は、お電話にて承っております。
+                お客様のご来店を心よりお待ちしております。
+            </p>
+            <a href="tel:075-XXXX-XXXX" class="inline-block bg-gray-800 text-white text-3xl font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-105">
+                075-XXXX-XXXX
+            </a>
+            <div class="mt-12 text-left bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h3 class="text-2xl font-serif-jp font-semibold mb-4 text-gray-800">営業時間</h3>
+                <p class="text-lg text-gray-700 mb-2"><strong>[昼]</strong> 12:00 - 14:00 (L.O. 13:00)</p>
+                <p class="text-lg text-gray-700 mb-4"><strong>[夜]</strong> 18:00 - 22:00 (L.O. 21:00)</p>
+                <p class="text-lg text-gray-700 mb-6"><strong>定休日:</strong> 不定休</p>
+
+                <h3 class="text-2xl font-serif-jp font-semibold mb-4 text-gray-800">注意事項</h3>
+                <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                    <li>ご予約の変更・キャンセルは、前日までにご連絡ください。</li>
+                    <li>当店では、小さなお子様のご入店はご遠慮いただいております。</li>
+                    <li>アレルギーや苦手な食材がございましたら、ご予約時にお申し付けください。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Access Section -->
+    <section id="access" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h2 class="text-4xl font-serif-jp font-bold mb-12 section-title text-gray-800">アクセス</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div class="text-left">
+                    <p class="text-lg leading-relaxed mb-4 text-gray-700">
+                        <strong class="block text-xl mb-2 text-gray-800">住所:</strong>
+                        〒600-8000<br>
+                        京都府京都市中京区〇〇町1-2-3
+                    </p>
+                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
+                        <strong class="block text-xl mb-2 text-gray-800">交通手段:</strong>
+                        地下鉄烏丸線 〇〇駅より徒歩5分
+                    </p>
+                    <a href="https://maps.app.goo.gl/YOUR_GOOGLE_MAPS_LINK" target="_blank" rel="noopener noreferrer" class="inline-block bg-gray-700 text-white py-3 px-6 rounded-lg shadow-md hover:bg-gray-600 transition duration-300 ease-in-out">
+                        Google Mapsで開く
+                    </a>
+                </div>
+                <div class="w-full h-80 bg-gray-300 rounded-lg shadow-lg overflow-hidden">
+                    <!-- Placeholder for Google Maps iframe -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3268.016029567995!2d135.76803831521193!3d35.0000000803565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDAwJzAwLjAiTiAxMzXCsDQ2JzAwLjAiRQ!5e0!3m2!1sen!2sjp!4v1678901234567!5m2!1sen!2sjp"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg font-serif-jp mb-4">匠 - TAKUMI</p>
+            <p class="text-sm">&copy; 2025 匠 All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        closeMobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('main-header');
+        const navLinks = document.querySelectorAll('#main-header .nav-link'); // Select only nav links within the header
+        const headerLogo = document.querySelector('#main-header .header-logo');
+        const mobileMenuIcon = document.querySelector('#main-header .mobile-menu-icon');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // When scrolled down 50px
+                header.classList.remove('initial-state');
+                header.classList.add('scrolled-state');
+            } else { // At the top
+                header.classList.remove('scrolled-state');
+                header.classList.add('initial-state');
+            }
+        });
+    </script>
+</body>
+</html>
